@@ -1,0 +1,97 @@
+# ===============================
+# Python / TensorFlow project
+# ===============================
+
+# Virtual environments
+.venv/
+env/
+venv/
+venv-*/
+
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+# Ignore notebook outputs (keep notebooks themselves under version control)
+notebooks/outputs/
+*.nbconvert.ipynb
+
+# Logs and temp files
+logs/
+*.log
+*.tmp
+*.bak
+
+# IDE and editor files
+.vscode/
+.idea/
+*.code-workspace
+
+# ===============================
+# Data folders (do not commit large datasets)
+# ===============================
+# Raw and processed datasets
+data/raw/
+data/processed/
+data/interim/
+data/external/
+
+# Temporary data or extracted archives
+*.zip
+*.tar
+*.tar.gz
+# Specific large archive present in workspace
+PlantVillageDataset.zip
+
+# ===============================
+# Models and weights
+# ===============================
+models/
+checkpoints/
+*.h5
+*.keras
+*.pb
+*.ckpt*
+*.tflite
+
+# ===============================
+# Generated outputs
+# ===============================
+reports/
+figures/
+plots/
+*.png
+*.jpg
+*.jpeg
+
+# ===============================
+# System & misc
+# ===============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment / credentials
+.env
+.env.*
+secrets.json
+credentials.json
+*.pem
+*.key
+
+# Python tooling caches / coverage
+.pytest_cache/
+.mypy_cache/
+.cache/
+pip-log.txt
+htmlcov/
+.coverage
+.coverage.*
+
+# Others (windows)
+Thumbs.db
+
+# End of file
