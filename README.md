@@ -1,4 +1,19 @@
-# Concordia — Machine Learning Projects
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:007bff,100:00ffcc&height=110&section=header&text=Machine%20Learning%20Project:%20Plant%20Health%20Detection&fontSize=25&fontColor=ffffff&animation=twinkling"/>
+</p>
+
+<h2>&nbsp;Tools and Technologies Used</h2>
+<p align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="python" width="45" height="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="tensorflow" width="45" height="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" alt="jupyter" width="45" height="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="docker" width="45" height="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="git" width="45" height="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" alt="bash" width="45" height="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="linux" width="45" height="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="vscode" width="45" height="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" alt="pycharm" width="45" height="45"/>
+</p>
 
 **Computer Science students @ EFREI Paris & Concordia**
 
@@ -14,7 +29,7 @@ This repository contains a reproducible pipeline for training and running a plan
 - Language: Python
 - ML / Deep Learning: TensorFlow, Keras
 - Other: scikit-learn, OpenCV (used in data preparation / experiments)
-- Tools: Git, Jupyter, Docker (optional), WSL2 (Ubuntu), TensorBoard
+- Tools: Git, Jupyter, Docker, WSL2 (Ubuntu), TensorBoard
 - Target environment used for development: Windows 11 + WSL2, NVIDIA GPU (CUDA)
 
 ---
