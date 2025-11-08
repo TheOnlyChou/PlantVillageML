@@ -34,6 +34,10 @@ This repository contains a reproducible pipeline for training and running a plan
 
 ---
 
+[![Watch the video](https://img.youtube.com/vi/0S81koZpwPA/0.jpg)](https://youtu.be/0S81koZpwPA?si=kzAsNo_gWiqf1BbF)
+
+---
+
 ## Quick start (recommended: WSL2 / Ubuntu)
 
 These instructions assume you are using WSL2 (Ubuntu) on Windows and want to run the repo there. If you prefer native Windows, adapt the commands accordingly.
@@ -81,6 +85,30 @@ pip install -r requirements.txt
 ```
 
 Tip: For best IO performance, you can clone the repo inside WSL's home directory and work there.
+
+---
+
+## Option 2: Installing tf-nightly in your virtual environment
+
+If you need the latest TensorFlow build with support for newer GPU architectures, you can install tf-nightly instead:
+
+```bash
+pip install -U tf-nightly
+```
+
+tf-nightly is the "tomorrow" version of TensorFlow, already compatible with Ada Lovelace GPUs and compute capability 12.x. It avoids JIT compilation issues but may contain minor bugs. It works well under WSL2 with CUDA 13.0.
+
+---
+
+## PyCharm WSL2 connection
+
+If you want to work from PyCharm while using your Linux GPU:
+
+1. Open your project in PyCharm
+2. Go to Settings > Project > Python Interpreter  
+3. Click the gear icon → Add Interpreter > WSL
+4. Choose your virtual environment path: `/home/user/mlproject/.venv/bin/python`
+5. Apply → PyCharm will use your WSL2 environment and access your Linux GPU
 
 ---
 
