@@ -1,30 +1,55 @@
-import tensorflow as tf
-from src.model import build_model
+import datetime
+from pathlib import Path
 
-def train_model(train_ds,
-                val_ds,
-                num_classes: int,
-                epochs: int = 10,
-                save_path: str = "models/plant_disease.keras"):
-    """
-    Train a TensorFlow model on the provided training and validation datasets.
-    """
-    # Build the model
+import tensorflow as tf
+from . import config
+from .model import build_model
+
+
+def train_model(
+    train_ds,
+    val_ds,
+    num_classes: int,
+    epochs: int = 10,
+    save_path=None,
+):
     model = build_model(num_classes)
 
-    # Perform data prefetching for performance optimization
-    autotune = tf.data.AUTOTUNE
-    train_ds = train_ds.prefetch(autotune)
-    val_ds = val_ds.prefetch(autotune)
+    if save_path is None:
+        save_path = config.MODELS_DIR / "plant_disease.keras"
+    save_path = Path(save_path)
+    save_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Train the model
+    logs_dir = getattr(config, "LOGS_DIR", Path("logs"))
+    logs_dir.mkdir(parents=True, exist_ok=True)
+    run_dir = logs_dir / datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    tensorboard_cb = tf.keras.callbacks.TensorBoard(
+        log_dir=run_dir,
+        histogram_freq=1,
+    )
+
+    callbacks = [
+        tf.keras.callbacks.EarlyStopping(
+            monitor="val_loss",
+            patience=3,
+            restore_best_weights=True,
+        ),
+        tf.keras.callbacks.ModelCheckpoint(
+            filepath=save_path,
+            monitor="val_loss",
+            save_best_only=True,
+        ),
+        tensorboard_cb,
+    ]
+
     history = model.fit(
         train_ds,
         validation_data=val_ds,
-        epochs=epochs
+        epochs=epochs,
+        callbacks=callbacks,
     )
 
-    # Save the trained model
-    model.save(save_path)
+    if not save_path.exists():
+        model.save(save_path)
 
     return model, history

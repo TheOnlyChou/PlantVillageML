@@ -1,5 +1,5 @@
 import tensorflow as tf
-from src import config
+from . import config
 
 def build_model(num_classes: int) -> tf.keras.Model:
     """
@@ -18,19 +18,23 @@ def build_model(num_classes: int) -> tf.keras.Model:
     )
     base_model.trainable = False  # Freeze pretrained layers
 
-    # Model architecture
+    data_augmentation = tf.keras.Sequential([
+        tf.keras.layers.RandomFlip("horizontal"),
+        tf.keras.layers.RandomRotation(0.1),
+    ], name="data_augmentation")
+
     inputs = tf.keras.Input(shape=(*config.IMG_SIZE, 3))
-    x = tf.keras.applications.efficientnet.preprocess_input(inputs)
+    x = data_augmentation(inputs)
+    x = tf.keras.applications.efficientnet.preprocess_input(x)
     x = base_model(x, training=False)
     x = tf.keras.layers.GlobalAveragePooling2D()(x)
-    x = tf.keras.layers.Dropout(0.2)(x)  # prevent overfitting
+    x = tf.keras.layers.Dropout(0.2)(x)
     outputs = tf.keras.layers.Dense(num_classes, activation="softmax")(x)
 
-    model = tf.keras.Model(inputs, outputs)
+    model = tf.keras.Model(inputs, outputs, name="plant_disease_classifier")
 
-    # Compilation
     model.compile(
-        optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
+        optimizer=tf.keras.optimizers.Adam(learning_rate=1e-4),
         loss="sparse_categorical_crossentropy",
         metrics=["accuracy"]
     )

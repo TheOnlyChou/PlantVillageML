@@ -9,7 +9,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_RAW_DIR = BASE_DIR / "data" / "raw"
 DATA_PROCESSED_DIR = BASE_DIR / "data" / "processed"
 MODELS_DIR = BASE_DIR / "models"
+LOGS_DIR = BASE_DIR / "logs"
 
 IMG_SIZE = (224, 224)
 BATCH_SIZE = 32
 EPOCHS = 10
+
+# Create the models directory if needed
+MODELS_DIR.mkdir(parents=True, exist_ok=True)

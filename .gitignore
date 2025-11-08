@@ -24,6 +24,10 @@ logs/
 *.log
 *.tmp
 *.bak
+# TensorBoard event files
+*.event*
+events.out.tfevents.*
+.tensorboard-info/
 
 # IDE and editor files
 .vscode/
@@ -91,7 +95,10 @@ htmlcov/
 .coverage
 .coverage.*
 
-# Others (windows)
-Thumbs.db
+# ===============================
+# WSL / Linux metadata
+# ===============================
+*.swp
+*.swo
 
 # End of file
