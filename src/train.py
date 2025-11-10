@@ -23,9 +23,12 @@ def train_model(
     logs_dir = getattr(config, "LOGS_DIR", Path("logs"))
     logs_dir.mkdir(parents=True, exist_ok=True)
     run_dir = logs_dir / datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+
     tensorboard_cb = tf.keras.callbacks.TensorBoard(
         log_dir=run_dir,
         histogram_freq=1,
+        write_graph=False,
+        write_images=False,
     )
 
     callbacks = [
