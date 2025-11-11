@@ -2,8 +2,8 @@ import datetime
 from pathlib import Path
 
 import tensorflow as tf
-from . import config
-from .model import build_model
+import config
+from model import build_model
 
 
 def train_model(

@@ -1,5 +1,6 @@
 import tensorflow as tf
-from . import config
+import config
+
 
 def build_model(num_classes: int) -> tf.keras.Model:
     """
@@ -12,16 +13,17 @@ def build_model(num_classes: int) -> tf.keras.Model:
 
     # Base model (EfficientNet pretrained on ImageNet)
     base_model = tf.keras.applications.EfficientNetB0(
-        include_top=False,
-        input_shape=(*config.IMG_SIZE, 3),
-        weights="imagenet"
+        include_top=False, input_shape=(*config.IMG_SIZE, 3), weights="imagenet"
     )
     base_model.trainable = False  # Freeze pretrained layers
 
-    data_augmentation = tf.keras.Sequential([
-        tf.keras.layers.RandomFlip("horizontal"),
-        tf.keras.layers.RandomRotation(0.1),
-    ], name="data_augmentation")
+    data_augmentation = tf.keras.Sequential(
+        [
+            tf.keras.layers.RandomFlip("horizontal"),
+            tf.keras.layers.RandomRotation(0.1),
+        ],
+        name="data_augmentation",
+    )
 
     inputs = tf.keras.Input(shape=(*config.IMG_SIZE, 3))
     x = data_augmentation(inputs)
@@ -36,7 +38,7 @@ def build_model(num_classes: int) -> tf.keras.Model:
     model.compile(
         optimizer=tf.keras.optimizers.Adam(learning_rate=1e-4),
         loss="sparse_categorical_crossentropy",
-        metrics=["accuracy"]
+        metrics=["accuracy"],
     )
 
     return model
