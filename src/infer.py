@@ -2,7 +2,8 @@ import tensorflow as tf
 import numpy as np
 from pathlib import Path
 from PIL import Image
-from . import config
+import config
+
 
 def load_model(model_path=None):
     if model_path is None:
@@ -10,6 +11,7 @@ def load_model(model_path=None):
     if not Path(model_path).exists():
         raise FileNotFoundError(f"Model not found at: {model_path}")
     return tf.keras.models.load_model(model_path)
+
 
 def preprocess_image(img_path, target_size=None):
     if target_size is None:
@@ -20,10 +22,12 @@ def preprocess_image(img_path, target_size=None):
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
+
 def is_healthy(class_name: str) -> bool:
     if not class_name:
         return False
     return "healthy" in class_name.lower()
+
 
 def predict_single_image(model, img_path, class_names=None):
     img_array = preprocess_image(img_path)
@@ -49,6 +53,7 @@ def predict_single_image(model, img_path, class_names=None):
         result["health"] = "not_healthy"
 
     return result
+
 
 def batch_predict(model, image_paths, class_names=None):
     results = []
