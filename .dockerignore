@@ -1,0 +1,29 @@
+# Python cache
+__pycache__/
+*.pyc
+.Python
+
+# Virtual env
+.venv/
+venv/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Data (ne pas copier dans l'image)
+data/raw/*
+data/processed/*
+
+# Modèles entraînés (montés via volume)
+models/*.keras
+models/*.h5
+
+# Logs
+logs/
+
+# IDE
+.idea/
+.vscode/
+
+# Git
+.git/
