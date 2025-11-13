@@ -1,5 +1,6 @@
 import tensorflow as tf
-from . import config
+import config
+
 
 def get_train_val_ds():
     base_dir = config.DATA_PROCESSED_DIR / "PlantVillage"
@@ -10,13 +11,10 @@ def get_train_val_ds():
         train_dir,
         image_size=config.IMG_SIZE,
         batch_size=config.BATCH_SIZE,
-        shuffle=True
+        shuffle=True,
     )
     val_ds = tf.keras.utils.image_dataset_from_directory(
-        val_dir,
-        image_size=config.IMG_SIZE,
-        batch_size=config.BATCH_SIZE,
-        shuffle=False
+        val_dir, image_size=config.IMG_SIZE, batch_size=config.BATCH_SIZE, shuffle=False
     )
 
     # Get class names from training dataset

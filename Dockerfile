@@ -1,4 +1,10 @@
-FROM python:3.10
+# to make sure the gpu is detected, run docker with the following:
+# --gpus all --ipc=host --ulimit memlock=-1 --ulimit stack=67108864 -p 8888:8888
+# optional : -it for interactive terminal
+#            --rm : remove container after run
+#            -v "$(pwd)/data:/app/data" : mount data dir
+
+FROM nvcr.io/nvidia/tensorflow:25.01-tf2-py3
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -7,21 +13,11 @@ ENV PYTHONUNBUFFERED=1 \
 # Define repo generated in the container
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    libglib2.0-0 \
-    libsm6 \
-    libxext6 \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY requirements.txt .
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
 COPY . .
-
 
 RUN mkdir -p data/raw data/processed models logs
 
 EXPOSE 5000
+EXPOSE 8888
 
-CMD ["/bin/bash"]
+CMD ["bash", "-c", "jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root --notebook-dir=/app"]

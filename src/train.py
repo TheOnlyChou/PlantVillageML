@@ -2,8 +2,8 @@ import datetime
 from pathlib import Path
 
 import tensorflow as tf
-from . import config
-from .model import build_model
+import config
+from model import build_model
 
 
 def train_model(
@@ -38,7 +38,7 @@ def train_model(
             restore_best_weights=True,
         ),
         tf.keras.callbacks.ModelCheckpoint(
-            filepath=save_path,
+            filepath=str(save_path),
             monitor="val_loss",
             save_best_only=True,
         ),
