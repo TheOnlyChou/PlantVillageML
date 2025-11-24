@@ -9,3 +9,6 @@ seaborn
 tqdm
 tensorboard
 kagglehub
+fastapi
+uvicorn
+python-multipart
