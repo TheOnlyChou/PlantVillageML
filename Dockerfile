@@ -16,8 +16,10 @@ WORKDIR /app
 COPY . .
 
 RUN mkdir -p data/raw data/processed models logs
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 5000
 EXPOSE 8888
 
-CMD ["bash", "-c", "jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root --notebook-dir=/app"]
+# CMD ["bash", "-c", "jupyter notebook --ip=0.0.0.0 --port=8888 --allow-root --notebook-dir=/app"]
+CMD ["uvicorn", "backend.app:app", "--host", "0.0.0.0", "--port", "5000", "--workers", "1"]
